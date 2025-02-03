@@ -4,25 +4,26 @@ import java.util.Collections;
 public class Deck {
     private LinkedList<Card> cards;
 
-    public Deck()
+    public Deck(boolean isEmpty)
     {
         cards = new LinkedList<Card>();
+        if (!isEmpty) {
+            String numbers = "1234567890TRS";
+            String colours = "RGYB";
 
-        String numbers = "1234567890TRS";
-        String colours = "RGYB";
-
-        for (char color : colours.toCharArray())
-        {
-            for (char number : numbers.toCharArray())
+            for (char color : colours.toCharArray())
             {
-                cards.add(new Card(number, color));
+                for (char number : numbers.toCharArray())
+                {
+                    cards.add(new Card(number, color));
+                }
             }
-        }
 
-        for (int i = 0; i < 4; i++)
-        {
-            cards.add(new Card('C', 'X'));
-            cards.add(new Card('F', 'X'));
+            for (int i = 0; i < 4; i++)
+            {
+                cards.add(new Card('C', 'X'));
+                cards.add(new Card('F', 'X'));
+            }
         }
     }
 
@@ -45,5 +46,15 @@ public class Deck {
     public Card getTop()
     {
         return cards.remove(0);
+    }
+
+    public void addCard(Card c)
+    {
+        cards.add(0, c);
+    }
+
+    public Card seeTop()
+    {
+        return cards.getFirst();
     }
 }
